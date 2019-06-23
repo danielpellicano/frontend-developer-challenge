@@ -4,10 +4,12 @@
 Foi escolhido o Framework VUE JS para o desenvolvimento deste teste, pelo fato de ele ser um pouco mais simples e a curva de aprendizado menor.
 
 # Requirements
-``` Node JS e NPM
+``` 
+Node JS e NPM
 ```
 ## Project setup
-``` 1) git clone no projeto | 2) npm install | 3) npm install -g @vue/cli
+``` 
+1) git clone no projeto | 2) npm install | 3) npm install -g @vue/cli
 ```
 
 ### Compiles and hot-reloads for development
