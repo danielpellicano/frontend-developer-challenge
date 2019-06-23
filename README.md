@@ -1,9 +1,20 @@
 # frontend-developer-challenge
 
+# About
+Foi escolhido o Framework VUE JS para o desenvolvimento deste teste, pelo fato de ele ser um pouco mais simples e a curva de aprendizado menor.
+
+# Requirements
+``` Node JS
+``` NPM
+```
 ## Project setup
+```
+git clone no projeto
 ```
 npm install
 ```
+npm install -g @vue/cli
+
 
 ### Compiles and hot-reloads for development
 ```
