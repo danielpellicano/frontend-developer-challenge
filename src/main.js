@@ -3,7 +3,9 @@ import App from './App.vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import BootstrapVue from 'bootstrap-vue'
-
+import VueScrollTo from 'vue-scrollto';
+ 
+Vue.use(VueScrollTo)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 

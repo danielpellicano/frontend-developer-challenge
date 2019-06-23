@@ -26,51 +26,53 @@
         <div class="container">
             <div class="row" v-if="products.length > 0 && loader == false">
                 <div class="col-md-3" v-for="product in products" :key="product.id">
-                    <product class="product" v-bind:product="product" />
+                    <product :id="(product.hash) ? product.hash : '' " class="product" v-bind:product="product" />
                 </div>
                 <div class="col-md-12">
                     <button @click="getProducts" class="maisProdutos">Ainda mais produtos aqui!</button>
                 </div>
             </div>
       
-            <div v-if="loader" class="row loading">
-                <div class="line1">
-  
-</div>
-<div class="line2">
-  
-</div>
-<div class="line3">
-  
-</div>
-<div class="line4">
-    
-</div>
-<div class="lod">
-<div class="lo">
-<div class="load">
-   <div class="animat">
-       <div class="load-mini">
-           <div class="animat-mini">
-                <div class="load-mini2">
-                     <div class="animat-mini2">
-                          <div class="load-mini3">
-                              <div class="animat-mini3">
-                                  <div class="load-mini4">
-                                      <div class="animat-mini4">
-                                            
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>                           
+            <div v-if="loader" class="row">
+                <div class="col-md-3 mt-2" v-for="product in products" :key="product.id">
+                    <div class="product card-laoder my-1">
+                        <!-- <img :src="require('@/assets/img/loader.gif')"> -->
                     </div>
                 </div>
-          </div>
-      </div>
-  </div>
-</div>
-</div>
-  </div>
+                <div class="col-md-3 mt-2">
+                    <div class="product card-laoder my-1">
+                    </div>
+                </div>
+                <div class="col-md-3 mt-2">
+                    <div class="product card-laoder my-1">
+                    </div>
+                </div>
+                <div class="col-md-3 mt-2">
+                    <div class="product card-laoder my-1">
+                    </div>
+                </div>
+                <div class="col-md-3 mt-2">
+                    <div class="product card-laoder my-1">
+                    </div>
+                </div>
+                <div class="col-md-3 mt-2">
+                    <div class="product card-laoder my-1">
+                    </div>
+                </div>
+                <div class="col-md-3 mt-2">
+                    <div class="product card-laoder my-1">
+                    </div>
+                </div>
+                <div class="col-md-3 mt-2">
+                    <div class="product card-laoder my-1">
+                    </div>
+                </div>
+                <div class="col-md-3 mt-2">
+                    <div class="product card-laoder my-1">
+                    </div>
+                </div>
+                
+                
             </div>
         </div>
         </section>
@@ -79,14 +81,15 @@
              <div class="container">
                 <h3>Compartilhe a novidade</h3>
                 <p>Quer que seus amigos também ganhem a lista personalizada deles? Preencha agora!</p>
+                <form>
                 <div class="row">
                     <div class="col-md-6">
                         <label>Nome do seu amigo:</label>
-                        <input type="text"  v-model="name">
+                        <input type="text"  v-model="name" required>
                     </div>
                     <div class="col-md-6">
                         <label>E-mail:</label>
-                        <input type="text"  v-model="email">
+                        <input type="text"  v-model="email" required>
                         <p class="red-text" v-if="validate">{{validate}}</p>
                         
                     </div>
@@ -96,6 +99,7 @@
                         <input type="submit" value="Enviar agora">
                     </div>
                 </div>
+                </form>
             </div>
         </section>
 
@@ -123,25 +127,56 @@ export default {
             base_url: 'https://frontend-intern-challenge-api.iurykrieger.now.sh/products',
             next_page: null,
             loader: false,
-            publicPath: process.env.BASE_URL
+            publicPath: process.env.BASE_URL,
+            next_scroll: ''
         }
     },
     mounted(){
         this.getProducts();
-        event.preventDefault();
+    },
+    watch:{
+        email (){
+            if(!this.validateEmail(this.email) && this.email.length > 3 ){
+                this.validate = 'Digite um email válido'
+            }else{
+                this.validate = '';
+            }
+        }
     },
   
     methods:{
+         validateEmail(email) {
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        },
         getProducts(){
             this.loader = true; 
             if(this.next_page != null){
                 this.axios.get('https://'+ this.next_page).then((response) => {
                     this.next_page = response.data.nextPage;
+                    let count = 0
                     response.data.products.forEach(element => {
+                        if(count == 0){
+                            var d = new Date();
+                            element.hash = d.getTime()
+                            element.hash = btoa(element.hash)
+                            this.next_scroll = element.hash;
+                        }else{
+                            element.hash = '';
+                        }
                         this.products.push(element);
+                        
+                        
                     });
                 }).finally(()=>{
                     this.loader = false;
+                    setTimeout(() => {
+                        let element = document.getElementById(this.next_scroll);
+                       
+                        this.$scrollTo(element, 1000, {
+                            offset: -140
+                        })
+                    }, 300);
                 });
             }else{
                 this.axios.get(this.base_url).then((response) => {
@@ -179,6 +214,21 @@ export default {
         url('~@/assets/fonts/HelveticaNeue-Bold.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
+}
+
+.card-laoder{
+    height: 300px;
+    width: 100%;
+
+  background: linear-gradient(to right, #eee 30%, #ddd 50%, #eee 70%);
+  background-color: #eee;
+  background-size: 400% 400%;
+  animation: 1s shimmer infinite forwards;
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 0%; }
+  100% { background-position: 0% 0%; }
 }
 
 </style>
