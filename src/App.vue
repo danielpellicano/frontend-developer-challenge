@@ -1,5 +1,26 @@
  <template>
     <div>
+      <header>
+        <div class="container">
+          <h1>uma seleção de produtos</h1>
+          <h2>especial para você</h2>
+          <p>Todos os produtos desta lista foram selecionados a partir da sua navegação. Aproveite!</p>
+       <b-navbar toggleable="lg" type="dark">
+
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+    <b-collapse id="nav-collapse" is-nav>
+      <b-navbar-nav>
+        <b-nav-item href="#">Conheça a Linx</b-nav-item>
+        <b-nav-item href="#">Ajude o algorítimo</b-nav-item>
+        <b-nav-item href="#">Seus produtos</b-nav-item>
+        <b-nav-item href="#">Compartilhe</b-nav-item>
+      </b-navbar-nav>
+
+    </b-collapse>
+  </b-navbar>
+  </div>
+      </header>
  <section class="produtos">
         <h3>Sua Seleção Especial</h3>
         <div class="container">
@@ -18,7 +39,7 @@
                     
                 </div>
             </div>
-            <div v-if="loader" class="row">
+            <div v-if="loader" class="row loading">
                 <div class="line1">
   
 </div>
@@ -29,7 +50,7 @@
   
 </div>
 <div class="line4">
-  
+    
 </div>
 <div class="lod">
 <div class="lo">
@@ -111,7 +132,10 @@ export default {
 }
 </script>
 <style>
-body{
+.loading{
+  height:100%;
+  width:100%;
+  position:fixed;
   margin: 0;
   padding: 0;
   overflow : hidden;
@@ -450,6 +474,29 @@ body{
     100%{
         transform: translateY(-100%);
     }
+}
+
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('~@/assets/fonts/HelveticaNeue.eot');
+    src: url('~@/assets/fonts/HelveticaNeue.eot?#iefix') format('embedded-opentype'),
+        url('~@/assets/fonts/HelveticaNeue.woff2') format('woff2'),
+        url('~@/assets/fonts/HelveticaNeue.woff') format('woff'),
+        url('~@/assets/fonts/HelveticaNeue.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('~@/assets/fonts/HelveticaNeue-Bold.eot');
+    src: url('~@/assets/fonts/HelveticaNeue-Bold.eot?#iefix') format('embedded-opentype'),
+        url('~@/assets/fonts/HelveticaNeue-Bold.woff2') format('woff2'),
+        url('~@/assets/fonts/HelveticaNeue-Bold.woff') format('woff'),
+        url('~@/assets/fonts/HelveticaNeue-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
 }
 
 </style>

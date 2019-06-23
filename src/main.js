@@ -4,6 +4,11 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import BootstrapVue from 'bootstrap-vue'
 
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+require('./assets/css/style.css')
+
 
 Vue.config.productionTip = false
 
