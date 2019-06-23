@@ -32,13 +32,7 @@
                     <button @click="getProducts" class="maisProdutos">Ainda mais produtos aqui!</button>
                 </div>
             </div>
-            
-            <div class="row" v-else-if="products.length == 0 && loader == false">
-                <div class="col-md-12">
-                    <h2>Ainda não temos produtos</h2>
-                    
-                </div>
-            </div>
+      
             <div v-if="loader" class="row loading">
                 <div class="line1">
   
@@ -80,6 +74,36 @@
             </div>
         </div>
         </section>
+
+        <section class="compartilheNovidade">
+             <div class="container">
+                <h3>Compartilhe a novidade</h3>
+                <p>Quer que seus amigos também ganhem a lista personalizada deles? Preencha agora!</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Nome do seu amigo:</label>
+                        <input type="text"  v-model="name">
+                    </div>
+                    <div class="col-md-6">
+                        <label>E-mail:</label>
+                        <input type="text"  v-model="email">
+                        <p class="red-text" v-if="validate">{{validate}}</p>
+                        
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-12">
+                        <input type="submit" value="Enviar agora">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <footer>
+        <p>Testando suas habilidades em HTML, CSS e JS. Linx Impulse 2019</p>
+        <p>Linx Impulse</p>
+        <p>2019</p>
+    </footer>
 </div>
 </template>
 <script>
